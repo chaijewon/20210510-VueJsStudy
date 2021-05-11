@@ -60,6 +60,26 @@ public class FoodDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectList("foodListData", cno);
 	}
+	/*
+	 *  <select id="foodCategoryInfoData" resultType="FoodCategoryVO" parameterType="int">
+		    SELECT title,subject FROM food_category
+		    WHERE no=#{no}
+		  </select>
+	 */
+	public FoodCategoryVO foodCategoryInfoData(int no)
+	{
+		return getSqlSession().selectOne("foodCategoryInfoData", no);
+	}
+	/*
+	 *  <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+		    SELECT * FROM food_house
+		    WHERE no=#{no}
+		  </select>
+	 */
+	public FoodVO foodDetailData(int no)
+	{
+		return getSqlSession().selectOne("foodDetailData", no);
+	}
    
 }
 

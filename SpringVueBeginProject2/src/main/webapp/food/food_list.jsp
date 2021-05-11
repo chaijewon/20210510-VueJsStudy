@@ -15,28 +15,81 @@
   <div id="app">
 	  <div class="row">
 	   <div class="jumbotron text-center">
-	     <h1>{{title}}</h1>
-	     <h4>{{subject}}</h4>
+	     <h1>{{info.title}}</h1>
+	     <h4>{{info.subject}}</h4>
 	   </div>
 	  </div>
 	  <div class="row">
-	  
+	  <%--
+	         response=> this는 Vue
+	         function(response){
+	            this => axios
+	         }
+	   --%>
+	   <table class="table">
+	    <tr>
+	     <td class="text-right">
+	      <a href="../main/main.do" class="btn btn-sm btn-primary">목록</a>
+	     </td>
+	    </tr>
+	   </table>
+	   <table class="table">
+	     <tr>
+	      <td>
+	        <table class="table" v-for="vo in food">
+	         <tr>
+	           <td class="text-center" width="30%" rowspan="3">
+	             <a :href="'../food/detail.do?no='+vo.no"><img :src="vo.poster" width=270 height=150></a>
+	           </td>
+	           <td width=70%>
+	              <h3><a :href="'../food/detail.do?no='+vo.no">{{vo.title}}</a>(<span style="color:orange">{{vo.score}}</span>)</h3>
+	           </td>
+	         </tr>
+	         <tr>
+	           <td width=70%>주소:{{vo.address}}</td>
+	         </tr>
+	         <tr>
+	           <td width=70%>전화:{{vo.tel}}</td>
+	         </tr>
+	        </table>
+	      </td>
+	     </tr>
+	   </table>
 	  </div>
 	  <script>
 	   new Vue({
 		   el:'#app',
 		   data:{
-			   title:'',
-			   subject:'',
-			   food:{},
-			   cno:${no},
-			   no:1
+			   info:{},
+			   food:[],
+			   cno:${no}
 		   },
 		   mounted:function(){
+			   axios.get("http://localhost/web/food/category_list.do",{
+				   params:{
+					   cno:this.cno
+				   }
+			   }).then(response=>{
+				   console.log(response);
+				   this.food=response.data;
+			   });
 			   
+			   axios.get("http://localhost/web/food/category_info.do",{
+				   params:{
+					   cno:this.cno
+				   }
+			   }).then(response=>{
+				   console.log(response);
+				   this.info=response.data;
+			   })
 		   }
 	   })
 	  </script>
   </div>
 </body>
 </html>
+
+
+
+
+

@@ -37,6 +37,14 @@
    FROM food_house
    WHERE cno=#{cno}
   </select>
+  <select id="foodCategoryInfoData" resultType="FoodCategoryVO" parameterType="int">
+    SELECT title,subject FROM food_category
+    WHERE no=#{no}
+  </select>
+  <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+    SELECT * FROM food_house
+    WHERE no=#{no}
+  </select>
 </mapper>
 
 
