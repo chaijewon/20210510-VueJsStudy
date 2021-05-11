@@ -1,8 +1,10 @@
 package com.sist.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 // 재사용 => 자동호출 
@@ -43,6 +45,9 @@ import org.springframework.stereotype.Component;
  *      ===========================> PointCut+JoinPoint=Advice (Advice여러개 => Aspect)
  */
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import java.text.*;
 @Component  // 메모리 할당
 @Aspect
@@ -60,6 +65,17 @@ public class MyAspect {
 	   System.out.println("수행시간:"+(end-start));
 	   System.out.println("===============================");
 	   return obj;
+   }
+   @Before("execution(* com.sist.web.LoginController.member_login_ok(..))")
+   public void before(JoinPoint joinPoint)
+   {
+	   HttpSession session=null;
+	   Object[] data=joinPoint.getArgs();
+	   session=(HttpSession)data[2];
+	   String id=(String)data[0];
+	   String pwd=(String)data[1];
+	   session.setAttribute("id", id);
+	   session.setAttribute("pwd", pwd);
    }
 }
 

@@ -21,7 +21,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="../main/main.do">맛집</a></li>
-      <li><a href="#">영화</a></li>
+      <li><a href="../movie/list.do">영화</a></li>
       <li><a href="#">레시피</a></li>
       <li><a href="#">뉴스</a></li>
     </ul>

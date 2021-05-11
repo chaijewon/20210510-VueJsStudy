@@ -6,8 +6,10 @@
   <typeAliases>
     <typeAlias type="com.sist.dao.FoodVO" alias="FoodVO"/>
     <typeAlias type="com.sist.dao.FoodCategoryVO" alias="FoodCategoryVO"/>
+    <typeAlias type="com.sist.dao.MovieVO" alias="MovieVO"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/sist/dao/food-mapper.xml"/>
+    <mapper resource="com/sist/dao/movie-mapper.xml"/>
   </mappers>
 </configuration>

@@ -52,10 +52,12 @@ public class FoodDAO extends SqlSessionDaoSupport{
 		         
 		         => NodeJS , Spring
 	 */
+	// [{},{}..] => [] , {}
 	public List<FoodCategoryVO> foodCategoryData(Map map)
 	{
 		return getSqlSession().selectList("foodCategoryData",map);
 	}
+	// []
 	public List<FoodVO> foodListData(int cno)
 	{
 		return getSqlSession().selectList("foodListData", cno);
@@ -66,6 +68,7 @@ public class FoodDAO extends SqlSessionDaoSupport{
 		    WHERE no=#{no}
 		  </select>
 	 */
+	//{}
 	public FoodCategoryVO foodCategoryInfoData(int no)
 	{
 		return getSqlSession().selectOne("foodCategoryInfoData", no);
@@ -76,6 +79,7 @@ public class FoodDAO extends SqlSessionDaoSupport{
 		    WHERE no=#{no}
 		  </select>
 	 */
+	//{}
 	public FoodVO foodDetailData(int no)
 	{
 		return getSqlSession().selectOne("foodDetailData", no);
