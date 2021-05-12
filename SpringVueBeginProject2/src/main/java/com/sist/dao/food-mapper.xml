@@ -45,6 +45,11 @@
     SELECT * FROM food_house
     WHERE no=#{no}
   </select>
+  <select id="totalFoodListData" resultType="FoodVO">
+    SELECT /*+ INDEX_ASC(food_house fh1_no_pk)*/title,poster,tel,rownum
+    FROM food_house
+    WHERE rownum&lt;=10
+  </select>
 </mapper>
 
 

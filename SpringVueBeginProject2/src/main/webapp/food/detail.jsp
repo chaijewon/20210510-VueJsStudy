@@ -71,6 +71,12 @@
     		  food:{},
     		  no:${no}
     	  },
+    	  created:function(){
+	    		console.log("food_detail.jsp:created=new Vue()생성");
+	    	},
+	    	updated:function(){
+	    		console.log("food_detail.jsp:updated=new Vue()유지");
+	    	},
     	  mounted:function(){
     		  axios.get("http://localhost/web/food/food_detail.do",{
     			  params:{

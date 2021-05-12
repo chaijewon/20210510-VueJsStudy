@@ -16,6 +16,10 @@
   <%--
      poster,title,regdate,genre,nation,grade,time,story,key;
     private double score;
+    
+    class A
+    new A()
+    new A()
    --%>
   <div id="app">
     <div class="row">
@@ -70,7 +74,7 @@
     		 mno:${mno}
     	 },
     	 mounted:function(){
-    		 axios.post("http://localhost/web/movie/movie_detail.do",{
+    		 axios.get("http://localhost/web/movie/movie_detail.do",{
     			 params:{
     				 mno:this.mno
     			 }

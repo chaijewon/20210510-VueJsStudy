@@ -27,6 +27,11 @@ public class MovieDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("movieTotalPage");
 	}
+	// <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+	public MovieVO movieDetailData(int mno)
+	{
+		return getSqlSession().selectOne("movieDetailData",mno);
+	}
    
 }
 

@@ -50,12 +50,19 @@
 		      </a>
 		    </div>
 	  </div>
-	  <script>
+  </div>
+  <script>
 	    new Vue({
 	    	el:'#app',
 	    	data:{
 	    		food:[],
 	    		no:1
+	    	},
+	    	created:function(){
+	    		console.log("home.jsp:created=new Vue()생성");
+	    	},
+	    	updated:function(){
+	    		console.log("home.jsp:updated=new Vue()유지");
 	    	},
 	    	mounted:function(){
 	    		axios.get("http://localhost/web/food/category.do",{
@@ -82,7 +89,6 @@
 	    	
 	    })
   </script>
-  </div>
   
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 import com.sist.dao.*;
@@ -51,7 +52,7 @@ public class MovieController {
 		map.put("start", start);
 		map.put("end", end);
 		List<MovieVO> list=dao.movieListData(map);
-		//[{}..]
+		//[{}..]  ==> JavaScript = Java 연동  ==> json , xml
 		JSONArray arr=new JSONArray();
 		for(MovieVO vo:list)
 		{
@@ -80,6 +81,32 @@ public class MovieController {
 	  model.addAttribute("mno", mno);
 	  model.addAttribute("main_jsp", "../movie/detail.jsp");
 	  return "main/main";
+  }
+  /*
+   *    Java       JavaScript
+   *    List        []  ==========> 자바에서 JSON[] => JSONArray
+   *                                [{},{},{}...]
+   *    VO          {}  ==========> {} => JSONObject
+   */
+  @GetMapping(value="movie/movie_detail.do",produces="text/plain;charset=UTF-8")
+  @ResponseBody
+  public String movie_moive_detail(int mno)
+  {
+	  // {}(VO)
+	  MovieVO vo=dao.movieDetailData(mno);
+	  JSONObject obj=new JSONObject();
+	  obj.put("mno", vo.getMno());
+	  obj.put("title", vo.getTitle());
+	  obj.put("poster", vo.getPoster());
+	  obj.put("time", vo.getTime());
+	  obj.put("grade", vo.getGrade());
+	  obj.put("score", vo.getScore());
+	  obj.put("genre", vo.getGenre());
+	  obj.put("nation", vo.getNation());
+	  obj.put("key", vo.getKey());
+	  obj.put("regdate", vo.getRegdate());
+	  obj.put("story", vo.getStory());
+	  return obj.toJSONString();
   }
 }
 

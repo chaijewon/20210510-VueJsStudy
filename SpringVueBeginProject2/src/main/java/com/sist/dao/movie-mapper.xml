@@ -11,4 +11,13 @@
   <select id="movieTotalPage" resultType="int">
     SELECT CEIL(COUNT(*)/12.0) FROM daum_movie
   </select>
+  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+    SELECT * FROM daum_movie
+    WHERE mno=#{mno}
+  </select>
+  <select id="totalMovieListData" resultType="MovieVO">
+    SELECT /*+ INDEX_ASC(daum_movie dm_mno_pk) */ title,poster,mno,rownum
+    FROM daum_movie
+    WHERE rownum&lt;=10
+  </select>
 </mapper>

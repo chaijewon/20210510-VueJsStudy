@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/vue"></script>
-   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -23,7 +23,7 @@
       <li class="active"><a href="../main/main.do">맛집</a></li>
       <li><a href="../movie/list.do">영화</a></li>
       <li><a href="#">레시피</a></li>
-      <li><a href="#">뉴스</a></li>
+      <li><a href="../news/list.do">뉴스</a></li>
     </ul>
   </div>
 </nav>
