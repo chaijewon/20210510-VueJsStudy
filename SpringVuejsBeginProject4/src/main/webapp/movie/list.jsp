@@ -14,6 +14,13 @@
    border:3px solid green;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	var offset = $('.col-sm-4').offset();  
+	$('.window').animate({scrollTop: (offset.top - $('.window').height() / 2)}, 500);
+})
+</script>
 </head>
 <body>
   <div style="height: 50px"></div>
