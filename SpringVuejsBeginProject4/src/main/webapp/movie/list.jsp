@@ -61,34 +61,14 @@
     	},
     	mounted:function(){
     		let _this=this;
-    		axios.get("http://localhost/web/movie/list.do",{
-    			params:{
-    				page:this.curpage,
-        			type:this.type,
-        			ss:this.ss	
-    			}
-    			
-    		}).then(function(response){
-    			_this.movie_data=response.data;
-    			console.log(response.data)
-    		})
-    		
-    		axios.get("http://localhost/web/movie/total.do",{
-    			params:{
-        			type:this.type,
-        			ss:this.ss	
-    			}
-    		}).then(function(response){
-    			_this.totalpage=response.data
-    			console.log(response.data)
-    		})
+    		this.movieGetData();
+    		this.movieGetTotalPage();
     	},
     	methods:{
-    		movieFind:function(){
-    			//alert("Type:"+this.type+",검색어:"+this.ss);
-    			this.curpage=1;
-    			let _this=this;
-	    		axios.get("http://localhost/web/movie/list.do",{
+    		
+    	    movieGetData:function(){
+    	    	let _this=this;
+    	    	axios.get("http://localhost/web/movie/list.do",{
 	    			params:{
 	    				page:this.curpage,
 	        			type:this.type,
@@ -98,8 +78,10 @@
 	    			_this.movie_data=response.data;
 	    			console.log(response.data)
 	    		})
-	    		
-	    		axios.get("http://localhost/web/movie/total.do",{
+    	    },
+    	    movieGetTotalPage:function(){
+    	    	let _this=this;
+    	    	axios.get("http://localhost/web/movie/total.do",{
 	    			params:{
 	        			type:this.type,
 	        			ss:this.ss	
@@ -108,34 +90,23 @@
 	    			_this.totalpage=response.data
 	    			console.log(response.data)
 	    		})
+    	    },
+    		movieFind:function(){
+    			//alert("Type:"+this.type+",검색어:"+this.ss);
+    			this.curpage=1;
+    			
+	    		this.movieGetData();
+	    		this.movieGetTotalPage();
     		},
     		prev:function(){
     			this.curpage=this.curpage>1?this.curpage-1:this.curpage;
-    			let _this=this;
-	    		axios.get("http://localhost/web/movie/list.do",{
-	    			params:{
-	    				page:this.curpage,
-	        			type:this.type,
-	        			ss:this.ss	
-	    			}
-	    		}).then(function(response){
-	    			_this.movie_data=response.data;
-	    			console.log(response.data)
-	    		})
+    			
+    			this.movieGetData()
     		},
     		next:function(){
     			this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage;
-    			let _this=this;
-	    		axios.get("http://localhost/web/movie/list.do",{
-	    			params:{
-	    				page:this.curpage,
-	        			type:this.type,
-	        			ss:this.ss	
-	    			}
-	    		}).then(function(response){
-	    			_this.movie_data=response.data;
-	    			console.log(response.data)
-	    		})
+    			
+    			this.movieGetData()
     		}
     	}
     })
