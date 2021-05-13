@@ -79,6 +79,27 @@ public class MovieController {
 	   return String.valueOf(total);
    }
    
+   @GetMapping(value="movie/detail.do",produces="text/plain;charset=UTF-8")
+   public String movie_detail(int mno)
+   {
+	   String json="";
+	   try
+	   {
+		   // MovieVO => JSONObject
+		   MovieVO vo=dao.movieDetailData(mno);
+		   JSONObject obj=new JSONObject();
+		   obj.put("director", vo.getDirector());
+		   obj.put("title", vo.getTitle());
+		   obj.put("poster", vo.getPoster());
+		   obj.put("genre", vo.getGenre());
+		   obj.put("actor", vo.getActor());
+		   obj.put("story", vo.getStory());
+		   
+		   json=obj.toJSONString();
+	   }catch(Exception ex){}
+	   return json;
+   }
+   
 }
 
 

@@ -11,6 +11,11 @@
 		KEY               VARCHAR2(50)
  -->
 <mapper namespace="com.sist.dao.movie-mapper">
+  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+   SELECT title,poster,genre,director,actor,story
+   FROM naver_movie
+   WHERE mno=#{mno}
+  </select>
   <sql id="movie-where">
        <if test="type=='T'.toString()">
         WHERE title LIKE '%'||#{ss}||'%'

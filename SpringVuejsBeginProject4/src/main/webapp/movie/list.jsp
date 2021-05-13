@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+.movie_images:hover{
+   cursor: pointer;
+   border:3px solid green;
+}
+</style>
 </head>
 <body>
   <div style="height: 50px"></div>
@@ -30,7 +36,8 @@
       <div style="height: 30px"></div>
       <div class="col-md-4" v-for="vo in movie_data">
 		     <div class="thumbnail">
-                <img :src="vo.poster" alt="Lights" style="width:320px;height: 320px" class="recipe_images">
+                <img :src="vo.poster" alt="Lights" style="width:320px;height: 320px" class="movie_images" 
+                   v-on:click="movieDetail(vo.mno)">
 		        <div class="caption">
 		          <p style="font-size: 9px">{{vo.title}}</p>
 		          <p style="font-size:8px">{{vo.genre}}</p>
@@ -45,8 +52,32 @@
 	    <button class="btn btn-sm btn-warning" v-on:click="next()">다음</button>
 	  </div>
     </div>
-    <div class="col-md-4">
-    
+    <div class="col-md-4" v-show="isShow">
+      <table class="table">
+        <tr>
+         <td width=30% class="text-center" rowspan="4">
+           <img :src="movie_detail.poster" width=100%>
+         </td>
+         <td colspan="2">
+           <h3>{{movie_detail.title}}</h3>
+         </td>
+        </tr>
+        <tr>
+          <td width=20% class="text-right">감독</td>
+          <td width=50%>{{movie_detail.director}}</td>
+        </tr>
+        <tr>
+          <td width=20% class="text-right">출연</td>
+          <td width=50%>{{movie_detail.actor}}</td>
+        </tr>
+        <tr>
+          <td width=20% class="text-right">장르</td>
+          <td width=50%>{{movie_detail.genre}}</td>
+        </tr>
+        <tr>
+          <td colspan="3">{{movie_detail.story}}</td>
+        </tr>
+      </table>
     </div>
   </div>
   <script>
@@ -57,7 +88,9 @@
     		curpage:1,
     		totalpage:1,
     		type:'',
-    		ss:''
+    		ss:'',
+    		movie_detail:{},
+    		isShow:false
     	},
     	mounted:function(){
     		let _this=this;
@@ -65,7 +98,18 @@
     		this.movieGetTotalPage();
     	},
     	methods:{
-    		
+    		movieDetail:function(no){
+    			this.isShow=true
+    			let _this=this;
+    			axios.get("http://localhost/web/movie/detail.do",{
+    				params:{
+    					mno:no
+    				}
+    			}).then(function(response){
+    				_this.movie_detail=response.data
+    				console.log(response.data)
+    			})
+    		},
     	    movieGetData:function(){
     	    	let _this=this;
     	    	axios.get("http://localhost/web/movie/list.do",{

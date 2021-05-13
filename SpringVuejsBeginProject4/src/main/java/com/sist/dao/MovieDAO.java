@@ -53,6 +53,25 @@ public class MovieDAO extends SqlSessionDaoSupport{
 		}
 		return total;
 	}
+	/*
+	 * <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+		   SELECT title,poster,genre,director,actor,story
+		   FROM naver_movie
+		   WHERE mno=#{mno}
+		  </select>
+	 */
+	public MovieVO movieDetailData(int mno)
+	{
+		MovieVO vo=null;
+		try
+		{
+			vo=getSqlSession().selectOne("movieDetailData",mno);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return vo;
+	}
    
 }
 
