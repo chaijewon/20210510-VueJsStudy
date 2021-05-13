@@ -90,7 +90,18 @@ public class RecipeController {
 	   {
 		   RecipeDetailVO vo=dao.recipeDetailData(rno);
 		   JSONObject obj=new JSONObject();//{}
-		   //obj.put("", vo.get)
+		   obj.put("poster", vo.getPoster());
+		   obj.put("chef", vo.getChef());
+		   obj.put("chef_poster", vo.getChef_poster());
+		   obj.put("title", vo.getTitle());
+		   obj.put("content", vo.getContent());
+		   obj.put("info1", vo.getInfo1());
+		   obj.put("info2", vo.getInfo2());
+		   obj.put("info3", vo.getInfo3());
+		   obj.put("food_make", vo.getFood_make());
+		   obj.put("chef_info", vo.getChef_info());
+		   
+		   json=obj.toJSONString();
 	   }catch(Exception ex){}
 	   return json;
    }
